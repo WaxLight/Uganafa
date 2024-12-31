@@ -1,10 +1,48 @@
 ﻿// Uganafa.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
-
-
-int main()
-{
-    
+#include <iostream>
+struct Position {
+    int x;
+    int y;
+};
+struct Sprite {
+    char Symbol;
+};
+struct Player {
+    struct Sprite PlayerSprite;
+    struct Position PlayerPosition;
+};
+struct Board {
+    struct Sprite BoardSprite;
+    struct Position BoardPosition;
+};
+struct Ability {
+    struct Sprite AbilitySprite;
+};
+void Spawn(int x, int y, struct Board Cell) {
+    std::cout << Cell.BoardSprite.Symbol;
+    Cell.BoardPosition.x = x;
+    Cell.BoardPosition.y = y;
+}
+void Spawn(int x, int y, struct Player Cell) {
+    std::cout << Cell.PlayerSprite.Symbol;
+    Cell.PlayerPosition.x = x;
+    Cell.PlayerPosition.y = y;
+}
+void BuildBoard(int maxX, int maxY, struct Board Cell) {
+    for (int i = 0; i < maxY; i++) {
+        for (int j = 0; j < maxX; j++) {
+            Spawn(j, i, Cell);
+        }
+        std::cout << "\n";
+    }
+}
+int main() {
+    int maxX = 20, maxY = 10;
+    struct Board Board;
+    struct Player Player;
+    Board.BoardSprite.Symbol = 'O';
+    BuildBoard(maxX, maxY, Board);
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
