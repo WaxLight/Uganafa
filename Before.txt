@@ -1,0 +1,43 @@
+struct Position {
+    int x;
+    int y;
+};
+struct Sprite {
+    char Symbol;
+};
+struct Player {
+    struct Sprite PlayerSprite;
+    struct Position PlayerPosition;
+};
+struct Board {
+    struct Sprite BoardSprite;
+    struct Position BPosition;
+};
+struct Ability {
+    struct Sprite AbilitySprite;
+};
+void Spawn(int x,int y,struct Board Cell){
+    printf("%c", Cell.BoardSprite.Symbol);
+    Cell.BPosition.x = x;
+    Cell.BPosition.y = y;
+}
+void Spawn(int x, int y, struct Player Cell) {
+    printf("%c", Cell.PlayerSprite.Symbol);
+    Cell.PlayerPosition.x = x;
+    Cell.PlayerPosition.y = y;
+}
+void BuildBoard(int maxX, int maxY, struct Board Cell) {
+    for (int i = 0; i < maxY; i++) {
+        for (int j = 0; j < maxX; j++) {
+            Spawn(j, i, Cell);
+        }
+        printf("\n");
+    }
+}
+int main(){
+int maxX = 20, maxY = 10;
+struct Board Board;
+struct Player Player;
+Board.BSymbol = 'O';
+BuildBoard(maxX, maxY, Board);
+}
