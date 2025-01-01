@@ -1,38 +1,46 @@
 ﻿// Uganafa.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 #include <iostream>
+//позиция объеста В пространстве
 struct Position {
     int x;
     int y;
 };
+//как объект выглядит
 struct Sprite {
     char Symbol;
 };
+//объект Игрок 
 struct Player {
     struct Sprite PlayerSprite;
     struct Position PlayerPosition;
 };
+//Объект клетка для игрового поля
 struct Cell {
     struct Sprite CellSprite;
     struct Position CellPosition;
     bool passable;
 };
+//Объект умение 
 struct Ability {
     struct Sprite AbilitySprite;
     struct Position AbilityPosition;
     int WhatAbility;
 
 };
+//Объект враг
 struct Enemy {
     struct Sprite EnemySprite;
     struct Position EnemyPosition;
     int hp;
 };
+//Объект босс
 struct Boss {
     struct Sprite BossSprite;
     struct Position BossPosition;
     int hp;
 };
+//Объект Игровое поле где появляются другие объекты
 struct Board {
     struct Player Player;
     struct Cell Cell;
@@ -40,17 +48,20 @@ struct Board {
     struct Enemy Enemy;
     struct Boss Boss;
 };
+//Функция вывода объкта на экран
 void Spawn(int x, int y, struct Position &myPosition, struct Sprite &mySprite) {
     std::cout << mySprite.Symbol;
     myPosition.x = x;
     myPosition.y = y;
 }
+//Функция создания игрового поля
 void BuildBoard(int maxX, int maxY, struct Board &Board) {
     for (int i = 0; i < maxY; i++) {
         for (int j = 0; j < maxX; j++) {
-            struct Cell Cell;
-            Cell.CellSprite.Symbol = Board.Cell.CellSprite.Symbol;
+            struct Cell Cell; //Создание клетки
+            Cell.CellSprite.Symbol = Board.Cell.CellSprite.Symbol;//присваивавние клетки её символа
             Cell.passable = true;
+            //Создание различных объектов: "непроходимой" Клетки , Игрока, Босса, Умения, Врага и "проходимой" Клетки в соотв. порядке
             if (i == 0 || j == 0|| i == maxY - 1 || j == maxX - 1) {
                 Spawn(j, i, Cell.CellPosition, Cell.CellSprite);
                 Cell.passable = false;
@@ -68,14 +79,17 @@ void BuildBoard(int maxX, int maxY, struct Board &Board) {
 int main() {
     int maxX = 20, maxY = 10;
     struct Board Board;
+    // Присваивание объектам их соотв. символ
     Board.Cell.CellSprite.Symbol = '.';
     Board.Player.PlayerSprite.Symbol = '@';
     Board.Boss.BossSprite.Symbol = '&';
     Board.Ability.AbilitySprite.Symbol = 'z';
     Board.Enemy.EnemySprite.Symbol = 'a';
+    //Присваивание Объектам их характеристики
     Board.Ability.WhatAbility = 1;
     Board.Enemy.hp = 3;
     Board.Boss.hp = 9;
+    //Создание игровоц доски
     BuildBoard(maxX, maxY, Board);
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
