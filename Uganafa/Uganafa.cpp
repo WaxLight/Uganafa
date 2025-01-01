@@ -73,6 +73,9 @@ int main() {
     Board.Boss.BossSprite.Symbol = '&';
     Board.Ability.AbilitySprite.Symbol = 'z';
     Board.Enemy.EnemySprite.Symbol = 'a';
+    Board.Ability.WhatAbility = 1;
+    Board.Enemy.hp = 3;
+    Board.Boss.hp = 9;
     BuildBoard(maxX, maxY, Board);
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
