@@ -12,27 +12,55 @@ struct Player {
     struct Sprite PlayerSprite;
     struct Position PlayerPosition;
 };
-struct Board {
-    struct Sprite BoardSprite;
-    struct Position BoardPosition;
+struct Cell {
+    struct Sprite CellSprite;
+    struct Position CellPosition;
+    bool passable;
 };
 struct Ability {
     struct Sprite AbilitySprite;
+    struct Position AbilityPosition;
+    int WhatAbility;
+
 };
-void Spawn(int x, int y, struct Board Cell) {
-    std::cout << Cell.BoardSprite.Symbol;
-    Cell.BoardPosition.x = x;
-    Cell.BoardPosition.y = y;
+struct Enemy {
+    struct Sprite EnemySprite;
+    struct Position EnemyPosition;
+    int hp;
+};
+struct Boss {
+    struct Sprite BossSprite;
+    struct Position BossPosition;
+    int hp;
+};
+struct Board {
+    struct Player Player;
+    struct Cell Cell;
+    struct Ability Ability;
+    struct Enemy Enemy;
+    struct Boss Boss;
+};
+void Spawn(int x, int y, struct Position &myPosition, struct Sprite &mySprite) {
+    std::cout << mySprite.Symbol;
+    myPosition.x = x;
+    myPosition.y = y;
 }
-void Spawn(int x, int y, struct Player Cell) {
-    std::cout << Cell.PlayerSprite.Symbol;
-    Cell.PlayerPosition.x = x;
-    Cell.PlayerPosition.y = y;
-}
-void BuildBoard(int maxX, int maxY, struct Board Cell) {
+void BuildBoard(int maxX, int maxY, struct Board &Board) {
     for (int i = 0; i < maxY; i++) {
         for (int j = 0; j < maxX; j++) {
-            Spawn(j, i, Cell);
+            struct Cell Cell;
+            Cell.CellSprite.Symbol = Board.Cell.CellSprite.Symbol;
+            Cell.passable = true;
+            if (i == 0 || j == 0|| i == maxY - 1 || j == maxX - 1) {
+                Spawn(j, i, Cell.CellPosition, Cell.CellSprite);
+                Cell.passable = false;
+            }
+            else if (i == 1 && j == 1)Spawn(j, i, Board.Player.PlayerPosition, Board.Player.PlayerSprite);
+            else if (i == maxY - 2 && j == maxX - 2)Spawn(j, i, Board.Boss.BossPosition, Board.Boss.BossSprite);
+            else if (std::rand() % 20 == 0 && Cell.passable)Spawn(j, i, Board.Ability.AbilityPosition, Board.Ability.AbilitySprite);
+            else if (std::rand() % 10 == 0 && Cell.passable)Spawn(j, i, Board.Enemy.EnemyPosition, Board.Enemy.EnemySprite);
+            else Spawn(j, i, Cell.CellPosition, Cell.CellSprite);
+
         }
         std::cout << "\n";
     }
@@ -40,8 +68,11 @@ void BuildBoard(int maxX, int maxY, struct Board Cell) {
 int main() {
     int maxX = 20, maxY = 10;
     struct Board Board;
-    struct Player Player;
-    Board.BoardSprite.Symbol = 'O';
+    Board.Cell.CellSprite.Symbol = '.';
+    Board.Player.PlayerSprite.Symbol = '@';
+    Board.Boss.BossSprite.Symbol = '&';
+    Board.Ability.AbilitySprite.Symbol = 'z';
+    Board.Enemy.EnemySprite.Symbol = 'a';
     BuildBoard(maxX, maxY, Board);
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
