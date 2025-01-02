@@ -1,6 +1,7 @@
 ﻿// Uganafa.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 #include <iostream>
+#include <SDL.h>
 //позиция объеста В пространстве
 struct Position {
     int x;
