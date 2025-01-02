@@ -2,6 +2,8 @@
 //
 #include <iostream>
 #include <SDL.h>
+
+#include "Game.h"
 //позиция объеста В пространстве
 struct Position {
     int x;
@@ -77,7 +79,7 @@ void BuildBoard(int maxX, int maxY, struct Board &Board) {
         std::cout << "\n";
     }
 }
-int main() {
+int notmain() {
     int maxX = 20, maxY = 10;
     struct Board Board;
     // Присваивание объектам их соотв. символ
@@ -92,6 +94,19 @@ int main() {
     Board.Boss.hp = 9;
     //Создание игровоц доски
     BuildBoard(maxX, maxY, Board);
+    return 0;
+}
+Game* game=__nullptr;
+int main(int argc, char* argv[]) {
+    game = new Game();
+    game->init("Uganafa", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 360, false);
+    while (game->running()) {
+        game->handleEvents();
+        game->update();
+        game->render();
+    }
+    game->clean();
+    return 0;
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
