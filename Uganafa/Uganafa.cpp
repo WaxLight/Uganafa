@@ -4,7 +4,7 @@
 #include <SDL.h>
 
 #include "Game.h"
-//позиция объеста В пространстве
+//позиция объеста В пространстве+
 struct Position {
     int x;
     int y;

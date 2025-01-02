@@ -1,8 +1,9 @@
 #include <iostream>
 #include "Game.h"
 #include "TextureManager.h"
-SDL_Texture* playerTex;
-SDL_Rect srcR, destR;
+#include"GameObject.h"
+
+GameObject* player;
 
 Game::Game() {}
 Game::~Game() {}
@@ -23,7 +24,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		}
 		isRunning = true;
 	}
-	playerTex = TextureManager::LoadTexture("Assets/Doock.png", renderer);
+	player = new GameObject("Assets/Doock.png", renderer,0,0);
 }
 void Game::handleEvents() {
 	SDL_Event event;
@@ -37,14 +38,13 @@ void Game::handleEvents() {
 	}
 }
 void Game::update() {
-	destR.h = 32*3;
-	destR.w = 32*3;
+	player->Update();
 
 }
 void Game::render() {
 	SDL_RenderClear(renderer);
 	//тут будем добавлять штуки на рендер
-	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+	player->Render();
 	SDL_RenderPresent(renderer);
 }
 void Game::clean() {
