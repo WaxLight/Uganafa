@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Game.h"
+#include "TextureManager.h"
 SDL_Texture* playerTex;
 SDL_Rect srcR, destR;
 
@@ -17,14 +18,12 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		}
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer) {
-			SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 			std::cout << "Renderer created" << std::endl;
 		}
 		isRunning = true;
 	}
-	SDL_Surface* tmpSurface= IMG_Load("Assets/Doock.png");
-	playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-	SDL_FreeSurface(tmpSurface);
+	playerTex = TextureManager::LoadTexture("Assets/Doock.png", renderer);
 }
 void Game::handleEvents() {
 	SDL_Event event;
@@ -37,11 +36,15 @@ void Game::handleEvents() {
 		break;
 	}
 }
-void Game::update() {}
+void Game::update() {
+	destR.h = 32*3;
+	destR.w = 32*3;
+
+}
 void Game::render() {
 	SDL_RenderClear(renderer);
 	//тут будем добавлять штуки на рендер
-	SDL_RenderCopy(renderer, playerTex, NULL, NULL);
+	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
 	SDL_RenderPresent(renderer);
 }
 void Game::clean() {

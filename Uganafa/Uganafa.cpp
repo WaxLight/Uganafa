@@ -9,11 +9,11 @@ struct Position {
     int x;
     int y;
 };
-//как объект выглядит
+//как объект выглядит+
 struct Sprite {
     char Symbol;
 };
-//объект Игрок 
+//объект Игрок +
 struct Player {
     struct Sprite PlayerSprite;
     struct Position PlayerPosition;
@@ -43,7 +43,7 @@ struct Boss {
     struct Position BossPosition;
     int hp;
 };
-//Объект Игровое поле где появляются другие объекты
+//Объект Игровое поле где появляются другие объекты +-
 struct Board {
     struct Player Player;
     struct Cell Cell;
@@ -51,7 +51,7 @@ struct Board {
     struct Enemy Enemy;
     struct Boss Boss;
 };
-//Функция вывода объкта на экран
+//Функция вывода объкта на экран +
 void Spawn(int x, int y, struct Position &myPosition, struct Sprite &mySprite) {
     std::cout << mySprite.Symbol;
     myPosition.x = x;
@@ -98,12 +98,23 @@ int notmain() {
 }
 Game* game=__nullptr;
 int main(int argc, char* argv[]) {
+
+    const int FPS = 60;
+    const int frameDelay = 1000 / FPS;
+
+    Uint32 frameStart;
+    int frameTime;
     game = new Game();
-    game->init("Uganafa", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 360, false);
+    game->init("Uganafa", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
     while (game->running()) {
+        frameStart = SDL_GetTicks();
         game->handleEvents();
         game->update();
         game->render();
+        frameTime = SDL_GetTicks() - frameStart;
+        if (frameDelay > frameTime) {
+            SDL_Delay(frameDelay - frameTime);
+        }
     }
     game->clean();
     return 0;
