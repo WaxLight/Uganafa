@@ -5,6 +5,8 @@
 
 GameObject* player;
 
+SDL_Renderer* Game::renderer = __nullptr;
+
 Game::Game() {}
 Game::~Game() {}
 void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bool fullscreen) {
@@ -24,7 +26,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		}
 		isRunning = true;
 	}
-	player = new GameObject("Assets/Doock.png", renderer,0,0);
+	player = new GameObject("Assets/Doock.png", 0, 0);
 }
 void Game::handleEvents() {
 	SDL_Event event;
