@@ -1,10 +1,11 @@
 #include <iostream>
 #include "Game.h"
 #include "TextureManager.h"
+#include "Map.h"
 #include"GameObject.h"
 
 GameObject* player;
-
+Map* map;
 SDL_Renderer* Game::renderer = __nullptr;
 
 Game::Game() {}
@@ -27,6 +28,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		isRunning = true;
 	}
 	player = new GameObject("Assets/Doock.png", 0, 0);
+	map = new Map();
 }
 void Game::handleEvents() {
 	SDL_Event event;
@@ -46,6 +48,7 @@ void Game::update() {
 void Game::render() {
 	SDL_RenderClear(renderer);
 	//тут будем добавлять штуки на рендер
+	map->DrawMap();
 	player->Render();
 	SDL_RenderPresent(renderer);
 }

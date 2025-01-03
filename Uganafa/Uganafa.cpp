@@ -18,7 +18,7 @@ struct Player {
     struct Sprite PlayerSprite;
     struct Position PlayerPosition;
 };
-//Объект клетка для игрового поля
+//Объект клетка для игрового поля+
 struct Cell {
     struct Sprite CellSprite;
     struct Position CellPosition;
@@ -43,7 +43,7 @@ struct Boss {
     struct Position BossPosition;
     int hp;
 };
-//Объект Игровое поле где появляются другие объекты +-
+//Объект Игровое поле где появляются другие объекты +
 struct Board {
     struct Player Player;
     struct Cell Cell;
@@ -57,7 +57,7 @@ void Spawn(int x, int y, struct Position &myPosition, struct Sprite &mySprite) {
     myPosition.x = x;
     myPosition.y = y;
 }
-//Функция создания игрового поля
+//Функция создания игрового поля+
 void BuildBoard(int maxX, int maxY, struct Board &Board) {
     for (int i = 0; i < maxY; i++) {
         for (int j = 0; j < maxX; j++) {
