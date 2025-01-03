@@ -60,6 +60,7 @@ Vector2D& operator/(Vector2D& v1, const Vector2D& v2)
 	return v1.Podelit(v2);
 }
 
+
 Vector2D& Vector2D::operator+=(const Vector2D& vec)
 {
 	return this->Add(vec);
@@ -75,4 +76,10 @@ Vector2D& Vector2D::operator*=(const Vector2D& vec)
 Vector2D& Vector2D::operator/=(const Vector2D& vec)
 {
 	return this->Podelit(vec);
+}
+
+std::ostream& operator<<(std::ostream& stream, const Vector2D& vec)
+{
+	stream << "(" << vec.x << "," << vec.y << ")";
+	return stream;
 }

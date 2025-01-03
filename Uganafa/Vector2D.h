@@ -1,6 +1,8 @@
 #pragma once
+#include <iostream>
 
 class Vector2D {
+public:
 	float x;
 	float y;
 
@@ -21,4 +23,6 @@ class Vector2D {
 	Vector2D& operator-=(const Vector2D& vec);
 	Vector2D& operator*=(const Vector2D& vec);
 	Vector2D& operator/=(const Vector2D& vec);
+
+	friend std::ostream& operator<<(std::ostream& stream, const Vector2D& vec);
 };

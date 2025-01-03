@@ -3,12 +3,13 @@
 #include "TextureManager.h"
 #include "Map.h"
 #include "ECS/Components.h"
+#include "Vector2D.h"
 
 
 Map* map;
 Manager manager;
 SDL_Renderer* Game::renderer = __nullptr;
-
+SDL_Event Game::event;
 auto& player(manager.addEntity());
 
 Game::Game() {}
@@ -32,12 +33,13 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		isRunning = true;
 	}
 	map = new Map();
-	player.addComponent<PositionComponenet>();
+	player.addComponent<TransformComponent>();
 	player.addComponent<SpriteComponent>("Assets/Doock.png");
+	player.addComponent<KeyboardController>();
 }
 //Эвенты для окна 
 void Game::handleEvents() {
-	SDL_Event event;
+	
 	SDL_PollEvent(&event);
 	switch (event.type) {
 	case SDL_QUIT://Если нажаи крестик на окне
@@ -50,8 +52,7 @@ void Game::handleEvents() {
 void Game::update() {
 	manager.referesh();
 	manager.update();
-
-	if (player.getComponent<PositionComponenet>().x() > 100) {
+	if (player.getComponent<TransformComponent>().position.x > 100) {
 		player.getComponent<SpriteComponent>().setTex("Assets/Enemy.png");
 	}
 }

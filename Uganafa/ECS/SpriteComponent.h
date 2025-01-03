@@ -4,7 +4,7 @@
 
 class SpriteComponent: public Component {
 private:
-	TransformComponenet* transform;
+	TransformComponent* transform;
 	SDL_Texture* texture;
 	SDL_Rect srcRect, destRect;
 public:
@@ -16,14 +16,14 @@ public:
 		texture = TextureManager::LoadTexture(path);
 	}
 	void init() override{
-		transform = &entity->getComponent<TransformComponenet>();
+		transform = &entity->getComponent<TransformComponent>();
 		srcRect.x = srcRect.y = 0;
 		srcRect.w = srcRect.h = 35;
 		destRect.w = destRect.h = 35 * 2;
 	}
 	void update() override {
-		destRect.x = position->x();
-		destRect.y = position->y();
+		destRect.x = (int)transform->position.x;
+		destRect.y = (int)transform->position.y;
 	};
 	void draw() override {
 		TextureManager::Draw(texture, srcRect, destRect);
