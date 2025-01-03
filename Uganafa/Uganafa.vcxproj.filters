@@ -33,6 +33,9 @@
     <ClCompile Include="Map.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -53,11 +56,14 @@
     <ClInclude Include="ECS\Components.h">
       <Filter>Исходные файлы\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\PositionComponent.h">
+    <ClInclude Include="ECS\TransformComponent.h">
       <Filter>Исходные файлы\ECS</Filter>
     </ClInclude>
     <ClInclude Include="ECS\SpriteComponent.h">
       <Filter>Исходные файлы\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

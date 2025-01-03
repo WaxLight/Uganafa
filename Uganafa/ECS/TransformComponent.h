@@ -1,16 +1,16 @@
 #pragma once
 #include "Components.h"
-class PositionComponenet :public Component {
+class TransformComponenet :public Component {
 private:
 	int xpos;
 	int ypos;
 public:
-	PositionComponenet()
+	TransformComponenet()
 	{
 		xpos = 0;
 		ypos = 0;
 	}
-	PositionComponenet(int x, int y) {
+	TransformComponenet(int x, int y) {
 		xpos = x;
 		ypos = y;
 	}
