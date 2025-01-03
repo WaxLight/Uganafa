@@ -51,6 +51,9 @@ void Game::update() {
 	manager.referesh();
 	manager.update();
 
+	if (player.getComponent<PositionComponenet>().x() > 100) {
+		player.getComponent<SpriteComponent>().setTex("Assets/Enemy.png");
+	}
 }
 void Game::render() {
 	SDL_RenderClear(renderer);

@@ -10,6 +10,9 @@ private:
 public:
 	SpriteComponent() = default;
 	SpriteComponent(const char* path) {
+		setTex(path);
+	}
+	void setTex(const char* path) {
 		texture = TextureManager::LoadTexture(path);
 	}
 	void init() override{
