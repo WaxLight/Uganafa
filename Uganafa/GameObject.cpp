@@ -1,10 +1,12 @@
 #include "GameObject.h"
 #include "TextureManager.h"
+//Загрузка текстуры игрового объекта в опр. месте
 GameObject::GameObject(const char* texturesheet,int x, int y) {
 	objTexture = TextureManager::LoadTexture(texturesheet);
 	xpos = x;
 	ypos = y;
 }
+//Обновление позиции объекта
 void GameObject::Update(){
 	
 
@@ -18,6 +20,7 @@ void GameObject::Update(){
 	destRect.w = srcRect.w * 2;
 	destRect.h = srcRect.h * 2;
 }
+//Загрузка копии объекта 
 void GameObject::Render() {
 	SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
 }

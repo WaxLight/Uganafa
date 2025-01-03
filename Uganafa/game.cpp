@@ -10,6 +10,7 @@ SDL_Renderer* Game::renderer = __nullptr;
 
 Game::Game() {}
 Game::~Game() {}
+//Инициализация игры: создание окна е
 void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bool fullscreen) {
 	int flags = 0;
 	if (fullscreen) flags = SDL_WINDOW_FULLSCREEN;
@@ -30,11 +31,12 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	player = new GameObject("Assets/Doock.png", 0, 0);
 	map = new Map();
 }
+//Эвенты для окна 
 void Game::handleEvents() {
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type) {
-	case SDL_QUIT:
+	case SDL_QUIT://Если нажаи крестик на окне
 		isRunning = false;
 		break;
 	default:
@@ -47,11 +49,12 @@ void Game::update() {
 }
 void Game::render() {
 	SDL_RenderClear(renderer);
-	//тут будем добавлять штуки на рендер
+	//тут будем добавлять штуки на рендер в порядке наслаивания
 	map->DrawMap();
 	player->Render();
 	SDL_RenderPresent(renderer);
 }
+//Очистка памяти
 void Game::clean() {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);

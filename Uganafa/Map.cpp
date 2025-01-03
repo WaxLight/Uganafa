@@ -1,7 +1,8 @@
 #include "Map.h"
 #include "TextureManager.h"
 
-int lvl[20][25] = { 0 };
+int lvl[20][25] = { 0 };//Создание уровня
+//Загрузка тексткр и их параметров
 Map::Map() {
 	dirt = TextureManager::LoadTexture("Assets/dirt.png");
 	grass = TextureManager::LoadTexture("Assets/grass.png");
@@ -15,12 +16,14 @@ Map::Map() {
 
 
 }
+//Заполнение карты нужным уровнем
 void Map::LoadMap(int arr[20][25]) {
 	for (int i = 0; i < 20; i++) {
 		for (int j = 0; j < 25; j++)
 			map[i][j] = arr[i][j];
 	}
 }
+//отрисовка карты в рендере
 void Map::DrawMap(){
 	int type = 0;
 	for (int i = 0; i < 20; i++) {

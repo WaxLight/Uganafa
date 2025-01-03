@@ -96,17 +96,21 @@ int notmain() {
     BuildBoard(maxX, maxY, Board);
     return 0;
 }
+
 Game* game=__nullptr;
 int main(int argc, char* argv[]) {
-
+    //Создаём константы и переменные для стабильного фпс
     const int FPS = 60;
     const int frameDelay = 1000 / FPS;
 
     Uint32 frameStart;
     int frameTime;
+    //создаём игру
     game = new Game();
+    // создаём окно с игрой с назанием Uganafa в центре экрана размером 800х640р не на полный экран 
     game->init("Uganafa", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
-    while (game->running()) {
+    // Создаём цикл, который воспроизводит ивенты, обновляет и рендерит игру и задерживает фпс
+    while (game->running()) { 
         frameStart = SDL_GetTicks();
         game->handleEvents();
         game->update();
@@ -116,6 +120,7 @@ int main(int argc, char* argv[]) {
             SDL_Delay(frameDelay - frameTime);
         }
     }
+    //Очищаем память
     game->clean();
     return 0;
 }
