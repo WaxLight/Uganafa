@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\ECS">
+      <UniqueIdentifier>{12396343-a091-4761-b2e2-8d1ebd40d075}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Uganafa.cpp">
@@ -44,11 +47,17 @@
     <ClInclude Include="Map.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ECS.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="ECS\ECS.h">
+      <Filter>Исходные файлы\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Components.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="ECS\Components.h">
+      <Filter>Исходные файлы\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\PositionComponent.h">
+      <Filter>Исходные файлы\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\SpriteComponent.h">
+      <Filter>Исходные файлы\ECS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

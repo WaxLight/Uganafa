@@ -2,11 +2,14 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "Map.h"
-#include"GameObject.h"
+#include "ECS/Components.h"
 
-GameObject* player;
+
 Map* map;
+Manager manager;
 SDL_Renderer* Game::renderer = __nullptr;
+
+auto& player(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
@@ -28,8 +31,9 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		}
 		isRunning = true;
 	}
-	player = new GameObject("Assets/Doock.png", 0, 0);
 	map = new Map();
+	player.addComponent<PositionComponenet>();
+	player.addComponent<SpriteComponent>("Assets/Doock.png");
 }
 //Ёвенты дл€ окна 
 void Game::handleEvents() {
@@ -44,14 +48,15 @@ void Game::handleEvents() {
 	}
 }
 void Game::update() {
-	player->Update();
+	manager.referesh();
+	manager.update();
 
 }
 void Game::render() {
 	SDL_RenderClear(renderer);
 	//тут будем добавл€ть штуки на рендер в пор€дке наслаивани€
 	map->DrawMap();
-	player->Render();
+	manager.draw();
 	SDL_RenderPresent(renderer);
 }
 //ќчистка пам€ти
