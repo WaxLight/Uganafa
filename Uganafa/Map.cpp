@@ -16,6 +16,11 @@ Map::Map() {
 
 
 }
+Map::~Map() {
+	SDL_DestroyTexture(dirt);
+	SDL_DestroyTexture(water);
+	SDL_DestroyTexture(grass);
+}
 //Заполнение карты нужным уровнем
 void Map::LoadMap(int arr[20][25]) {
 	for (int i = 0; i < 20; i++) {
