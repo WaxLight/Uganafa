@@ -53,7 +53,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	
 
 	player.addComponent<TransformComponent>(2);
-	player.addComponent<SpriteComponent>("Assets/Doock_idle.png",4,100);
+	player.addComponent<SpriteComponent>("Assets/Doock_anim.png",true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
@@ -78,9 +78,6 @@ void Game::handleEvents() {
 void Game::update() {
 	manager.referesh();
 	manager.update();
-	if (player.getComponent<TransformComponent>().position.x > 300) {
-		player.getComponent<SpriteComponent>().setTex("Assets/Enemy.png");
-	}
 	for (auto cc : colliders) {
 		Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
 	}
