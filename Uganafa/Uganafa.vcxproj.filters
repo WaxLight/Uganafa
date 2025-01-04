@@ -37,7 +37,7 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
-      <Filter>Исходные файлы\ECS</Filter>
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,9 +65,6 @@
     <ClInclude Include="ECS\SpriteComponent.h">
       <Filter>Исходные файлы\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="ECS\KeyboardController.h">
       <Filter>Исходные файлы\ECS</Filter>
     </ClInclude>
@@ -75,6 +72,9 @@
       <Filter>Исходные файлы\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

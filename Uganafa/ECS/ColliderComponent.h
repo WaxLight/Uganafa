@@ -3,13 +3,17 @@
 #include <SDL.h>
 #include "Components.h"
 
-class  ColiderComponent :public Component
+class  ColliderComponent :public Component
 {
 public:
 	SDL_Rect collider;
 	std::string tag;
 
 	TransformComponent* transform;
+
+	ColliderComponent(std::string t) {
+		tag = t;
+	}
 
 	void init() override {
 		if (!entity->hasComponent<TransformComponent>()) {
@@ -18,9 +22,9 @@ public:
 		transform = &entity->getComponent<TransformComponent>();
 	}
 	void update() override {
-		collider.x = transform->position.x;
-		collider.y = transform->position.y;
-		collider.w = transform->width;
-		collider.h = transform->height;
+		collider.x = static_cast<int>(transform->position.x);
+		collider.y = static_cast<int>(transform->position.y);
+		collider.w = static_cast<int>(transform->width);
+		collider.h = static_cast<int>(transform->height);
 	}
 };
