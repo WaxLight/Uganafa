@@ -63,13 +63,14 @@ void Game::handleEvents() {
 void Game::update() {
 	manager.referesh();
 	manager.update();
-	if (player.getComponent<TransformComponent>().position.x > 100) {
+	if (player.getComponent<TransformComponent>().position.x > 300) {
 		player.getComponent<SpriteComponent>().setTex("Assets/Enemy.png");
 	}
 	if (Collision::AABB(player.getComponent<ColliderComponent>().collider,
 		wall.getComponent<ColliderComponent>().collider)) 
 	{
-		player.getComponent<TransformComponent>().scale += 1;
+		player.getComponent<TransformComponent>().scale = 1;
+		player.getComponent<TransformComponent>().velocity * -1;
 		std::cout << "Wall hit! aaaaaaa" << std::endl;
 	}
 }
