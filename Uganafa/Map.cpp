@@ -1,53 +1,18 @@
 #include "Map.h"
-#include "TextureManager.h"
+#include "Game.h"
+#include<random>
 
-int lvl[20][25] = { 0 };//Создание уровня
 //Загрузка тексткр и их параметров
-Map::Map() {
-	dirt = TextureManager::LoadTexture("Assets/dirt.png");
-	grass = TextureManager::LoadTexture("Assets/grass.png");
-	water = TextureManager::LoadTexture("Assets/water.png");
-	LoadMap(lvl);
-	src.x = src.y = 0;
-	src.h = dest.h =35;
-	src.w = dest.w = 35;
-
-	dest.x = dest.y = 0;
-
-
-}
+Map::Map(){}
 Map::~Map() {
-	SDL_DestroyTexture(dirt);
-	SDL_DestroyTexture(water);
-	SDL_DestroyTexture(grass);
 }
-//Заполнение карты нужным уровнем
-void Map::LoadMap(int arr[20][25]) {
-	for (int i = 0; i < 20; i++) {
-		for (int j = 0; j < 25; j++)
-			map[i][j] = arr[i][j];
-	}
-}
-//отрисовка карты в рендере
-void Map::DrawMap(){
-	int type = 0;
-	for (int i = 0; i < 20; i++) {
-		for (int j = 0; j < 25; j++) {
-			type = map[i][j];
-			dest.x = j * 35;
-			dest.y = i * 35;
-			switch (type) {
-			case 0: 
-				TextureManager::Draw(water, src, dest);
-				break;
-			case 1:
-				TextureManager::Draw(grass, src, dest);
-				break;
-			case 2:
-				TextureManager::Draw(dirt, src, dest);
-				break;
-			default: break;
-			}
+void Map::LoadMap( int sizeX, int sizeY)
+{
+	std::random_device rd;
+	std::uniform_int_distribution<int> dist(0, 2);
+	for (int y = 0; y < sizeY; y++) {
+		for (int x = 0; x < sizeX; x++) {
+			Game::AddTile(dist(rd), x*35, y*35);
 		}
 	}
 }
