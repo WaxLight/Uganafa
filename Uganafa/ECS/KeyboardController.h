@@ -32,7 +32,8 @@ public:
 				sprite->spriteFlip = SDL_FLIP_HORIZONTAL; break;
 			case SDLK_d:
 				transform->velocity.x = 1;
-				sprite->Play("Walk"); break;
+				sprite->Play("Walk"); 
+				sprite->spriteFlip = SDL_FLIP_NONE; break;
 			default:
 				break;
 			}
@@ -48,8 +49,7 @@ public:
 				sprite->Play("Idle"); break;
 			case SDLK_a:
 				transform->velocity.x = 0; 
-				sprite->Play("Idle"); 
-				sprite->spriteFlip = SDL_FLIP_NONE; break;
+				sprite->Play("Idle"); break;
 			case SDLK_d:
 				transform->velocity.x = 0;
 				sprite->Play("Idle"); break;
