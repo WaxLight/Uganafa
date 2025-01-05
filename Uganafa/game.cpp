@@ -17,6 +17,8 @@ std::vector<ColliderComponent*> Game::colliders;
 
  bool Game::isRunning=false;
 
+ SDL_Rect Game::camera = { 0,0,800,640 };
+
 auto& player(manager.addEntity());
 auto& wall(manager.addEntity());
 
@@ -78,6 +80,10 @@ void Game::handleEvents() {
 void Game::update() {
 	manager.referesh();
 	manager.update();
+
+	camera.x = player.getComponent<TransformComponent>().position.x- 800/2;
+	camera.y = player.getComponent<TransformComponent>().position.y - 640 / 2;
+
 	for (auto cc : colliders) {
 		Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
 	}
