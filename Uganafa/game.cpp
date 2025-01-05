@@ -18,6 +18,8 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.addEntity());
 auto& wall(manager.addEntity());
 
+const char* mapfile = "Assets/TXTilesetGrass.png";
+
 enum groupLabels : std::size_t {
 	groupMap,
 	groupPlayers,
@@ -40,7 +42,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		}
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		if (renderer) {
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			SDL_SetRenderDrawColor(renderer, 114, 117, 27, 255);
 			std::cout << "Renderer created" << std::endl;
 		}
 		isRunning = true;
@@ -49,7 +51,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 
 	//ECS штуки
 
-	Map::LoadMap(16, 16);
+	Map::LoadMap(25, 20);
 	
 
 	player.addComponent<TransformComponent>(2);
@@ -58,10 +60,6 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
 
-	wall.addComponent<TransformComponent>(300.f, 300.f, 300, 20, 1);
-	wall.addComponent<SpriteComponent>("Assets/dirt.png");
-	wall.addComponent<ColliderComponent>("wall");
-	wall.addGroup(groupMap);
 }
 //Ёвенты дл€ окна 
 void Game::handleEvents() {
@@ -92,6 +90,7 @@ void Game::render() {
 	//тут будем добавл€ть штуки на рендер в пор€дке наслаивани€
 	for (auto& t : tiles) {
 		t->draw();
+		//std::cout << "Draw complete" << "\n";
 	}
 	for (auto& p : players) {
 		p->draw();
@@ -109,8 +108,8 @@ void Game::clean() {
 	std::cout << "Game Cleaned" << std::endl;
 }
 
-void Game::AddTile(int id, int x, int y) {
+void Game::AddTile(int srcX, int srcY, int xpos, int ypos) {
 	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(x, y, 32, 32, id);
+	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, mapfile);
 	tile.addGroup(groupMap);
 }

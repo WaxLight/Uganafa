@@ -60,7 +60,7 @@ public:
 		destRect.h = transform->height * transform->scale;
 	};
 	void draw() override {
-		TextureManager::Draw(texture, srcRect, destRect,spriteFlip);
+		TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
 	};
 	void Play(const char* animName) {
 		frames = animations[animName].frames;
