@@ -15,6 +15,8 @@ SDL_Event Game::event;
 
 std::vector<ColliderComponent*> Game::colliders;
 
+ bool Game::isRunning=false;
+
 auto& player(manager.addEntity());
 auto& wall(manager.addEntity());
 

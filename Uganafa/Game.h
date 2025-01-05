@@ -22,7 +22,7 @@ public:
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static std::vector<ColliderComponent*> colliders;
+	static bool isRunning;
 private:
-	bool isRunning=false;
 	SDL_Window* window;
 };
