@@ -2,10 +2,14 @@
 
 class Map {
 public:
-	Map();
+	Map(const char* mf, int ms, int ts);
 	~Map();
 
-	static void LoadMap( int sizeX,int sizeY);
+	void LoadMap( int sizeX,int sizeY);
+	void AddTile(int srcX, int srcY, int xpos, int ypos);
 private:
-	
+	const char* mapFile;
+	int mapScale;
+	int tileSize;
+	int scaledSize;
 };

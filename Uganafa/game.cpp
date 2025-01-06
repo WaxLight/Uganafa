@@ -6,30 +6,23 @@
 #include "Vector2D.h"
 #include "Collision.h"
 
-
 Map* map;
 Manager manager;
 
 SDL_Renderer* Game::renderer = __nullptr;
 SDL_Event Game::event;
 
-std::vector<ColliderComponent*> Game::colliders;
+//std::vector<ColliderComponent*> Game::colliders;
 
  bool Game::isRunning=false;
 
  SDL_Rect Game::camera = { 0,0,800,640 };
 
 auto& player(manager.addEntity());
-auto& wall(manager.addEntity());
 
 const char* mapfile = "Assets/TXTilesetGrass.png";
 
-enum groupLabels : std::size_t {
-	groupMap,
-	groupPlayers,
-	groupEnemies,
-	groupColliders
-};
+
 
 Game::Game() {}
 Game::~Game() {}
@@ -51,20 +44,23 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		}
 		isRunning = true;
 	}
-	map = new Map();
+	map = new Map(mapfile, 2, 32);
 
 	//ECS штуки
-
-	Map::LoadMap(25, 20);
-	
+	std::cout << "Map started "<< std::clock()<<std::endl;
+	map->LoadMap(25, 20);
+	std::cout << "Map loaded\n";
 
 	player.addComponent<TransformComponent>(2);
 	player.addComponent<SpriteComponent>("Assets/Doock_anim.png",true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
-
+	std::cout << "PlayerCreated\n";
 }
+auto& tiles(manager.getGroup(Game::groupMap));
+auto& players(manager.getGroup(Game::groupPlayers));
+auto& colliders(manager.getGroup(Game::groupColliders));
 //Ёвенты дл€ окна 
 void Game::handleEvents() {
 	
@@ -78,20 +74,24 @@ void Game::handleEvents() {
 	}
 }
 void Game::update() {
+	SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
+	Vector2D playerPos = player.getComponent<TransformComponent>().position;
+
 	manager.referesh();
 	manager.update();
 
-	camera.x = player.getComponent<TransformComponent>().position.x- 800/2;
+	for (auto& c : colliders) {
+		SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
+		if (Collision::AABB(cCol, playerCol)) {
+			player.getComponent<TransformComponent>().position = playerPos;
+		}
+	}
+
+	camera.x = player.getComponent<TransformComponent>().position.x - 800 / 2;
 	camera.y = player.getComponent<TransformComponent>().position.y - 640 / 2;
 
-	for (auto cc : colliders) {
-		Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
-	}
+	
 }
-
-auto& tiles(manager.getGroup(groupMap));
-auto& players(manager.getGroup(groupPlayers));
-auto& enemies(manager.getGroup(groupEnemies));
 
 void Game::render() {
 	SDL_RenderClear(renderer);
@@ -100,12 +100,13 @@ void Game::render() {
 		t->draw();
 		//std::cout << "Draw complete" << "\n";
 	}
+	for (auto& c : colliders) {
+		c->draw();
+	}
 	for (auto& p : players) {
 		p->draw();
 	}
-	for (auto& e : enemies) {
-		e->draw();
-	}
+	
 	SDL_RenderPresent(renderer);
 }
 //ќчистка пам€ти
@@ -116,8 +117,3 @@ void Game::clean() {
 	std::cout << "Game Cleaned" << std::endl;
 }
 
-void Game::AddTile(int srcX, int srcY, int xpos, int ypos) {
-	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, mapfile);
-	tile.addGroup(groupMap);
-}
