@@ -42,6 +42,9 @@
     <ClCompile Include="ECS\ECS.cpp">
       <Filter>Исходные файлы\ECS</Filter>
     </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="ECS\Animation.h">
       <Filter>Исходные файлы\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

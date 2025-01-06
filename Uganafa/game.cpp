@@ -5,24 +5,20 @@
 #include "ECS/Components.h"
 #include "Vector2D.h"
 #include "Collision.h"
+#include "AssetManager.h"
 
 Map* map;
 Manager manager;
+AssetManager* Game::assets = new AssetManager(&manager);
 
 SDL_Renderer* Game::renderer = __nullptr;
 SDL_Event Game::event;
-
-//std::vector<ColliderComponent*> Game::colliders;
 
  bool Game::isRunning=false;
 
  SDL_Rect Game::camera = { 0,0,800,640 };
 
 auto& player(manager.addEntity());
-
-const char* mapfile = "Assets/TXTilesetGrass.png";
-
-
 
 Game::Game() {}
 Game::~Game() {}
@@ -44,7 +40,10 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		}
 		isRunning = true;
 	}
-	map = new Map(mapfile, 2, 32);
+	assets->AddTexture("map", "Assets/TXTilesetGrass.png");
+	assets->AddTexture("player", "Assets/Doock_anim.png");
+
+	map = new Map("map", 2, 32);
 
 	//ECS штуки
 	std::cout << "Map started "<< std::clock()<<std::endl;
@@ -52,7 +51,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	std::cout << "Map loaded\n";
 
 	player.addComponent<TransformComponent>(2);
-	player.addComponent<SpriteComponent>("Assets/Doock_anim.png",true);
+	player.addComponent<SpriteComponent>("player", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);

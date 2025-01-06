@@ -7,7 +7,7 @@
 
 extern Manager manager;
 
-Map::Map(const char* mf, int ms, int ts) :mapFile(mf), mapScale(ms), tileSize(ts)
+Map::Map(std::string tID, int ms, int ts) :texID(tID), mapScale(ms), tileSize(ts)
 {
 	scaledSize = ms * ts;
 
@@ -24,7 +24,7 @@ void Map::LoadMap( int sizeX, int sizeY)
 			int k = dist(rd);
 			int m = dist(rd) * tileSize;
 		AddTile(m, k * tileSize, x * scaledSize, y * scaledSize);
-		if (k > 4) {
+		if (k > 4 && x > 0 && y > 0) {
 			auto& tcol(manager.addEntity());
 			tcol.addComponent<ColliderComponent>("zemla", x * scaledSize, y * scaledSize,scaledSize);
 			tcol.addGroup(Game::groupColliders);
@@ -35,6 +35,6 @@ void Map::LoadMap( int sizeX, int sizeY)
 }
 void Map::AddTile(int srcX, int srcY, int xpos, int ypos) {
 	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, tileSize, mapScale, mapFile);
+	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, tileSize, mapScale, texID);
 	tile.addGroup(Game::groupMap);
 }
