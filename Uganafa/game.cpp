@@ -42,6 +42,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	}
 	assets->AddTexture("map", "Assets/TXTilesetGrass.png");
 	assets->AddTexture("player", "Assets/Doock_anim.png");
+	assets->AddTexture("projectile", "Assets/proj.png");
 
 	map = new Map("map", 2, 32);
 
@@ -50,16 +51,24 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	map->LoadMap(25, 20);
 	std::cout << "Map loaded\n";
 
-	player.addComponent<TransformComponent>(2);
+	player.addComponent<TransformComponent>(0,0,32,32,2);
 	player.addComponent<SpriteComponent>("player", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
 	std::cout << "PlayerCreated\n";
+
+	assets->CreateObjects(Vector2D(32.f, 0.f), Vector2D(-1.f, 0.f), 600, 1, "projectile");
+	//assets->CreateObjects(Vector2D(0, 0), Vector2D(0, 1), 600, 1, "projectile");
+	//assets->CreateObjects(Vector2D(0, 0), Vector2D(1, 0), 600, 1, "projectile");
+	assets->CreateObjects(Vector2D(32.f, 0.f), Vector2D(0.f, -1.f), 600, 1, "projectile");
+	assets->CreateObjects(Vector2D(0.f, 0.f), Vector2D(0.f, 0.f), 6400, 0, "projectile");
+	std::cout << "ProjectileCreated\n";
 }
 auto& tiles(manager.getGroup(Game::groupMap));
 auto& players(manager.getGroup(Game::groupPlayers));
 auto& colliders(manager.getGroup(Game::groupColliders));
+auto& projectiles(manager.getGroup(Game::groupProjectiles));
 //Ёвенты дл€ окна 
 void Game::handleEvents() {
 	
@@ -85,9 +94,14 @@ void Game::update() {
 			player.getComponent<TransformComponent>().position = playerPos;
 		}
 	}
+	for (auto& p : projectiles) {
+		if (Collision::AABB(playerCol, p->getComponent<ColliderComponent>().collider)) {
+			std::cout << "player hit\n";//p->destroy();
+		}
+	}
 
-	camera.x = player.getComponent<TransformComponent>().position.x - 800 / 2;
-	camera.y = player.getComponent<TransformComponent>().position.y - 640 / 2;
+	camera.x = player.getComponent<TransformComponent>().position.x - 800.f / 2.f;
+	camera.y = player.getComponent<TransformComponent>().position.y - 640.f / 2.f;
 
 	
 }
@@ -105,7 +119,9 @@ void Game::render() {
 	for (auto& p : players) {
 		p->draw();
 	}
-	
+	for (auto& p : projectiles) {
+		p->draw();
+	}
 	SDL_RenderPresent(renderer);
 }
 //ќчистка пам€ти

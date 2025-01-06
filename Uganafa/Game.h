@@ -29,7 +29,8 @@ public:
 		groupMap,
 		groupPlayers,
 		groupEnemies,
-		groupColliders
+		groupColliders,
+		groupProjectiles
 	};
 private:
 	SDL_Window* window;

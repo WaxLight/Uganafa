@@ -76,13 +76,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_image\include;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_ttf\include;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_image\include;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_image\lib\x64;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_ttf\lib\x64;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_image\lib\x64;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,13 +107,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_image\include;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_ttf\include;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_image\include;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_image\lib\x64;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_ttf\lib\x64;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2_image\lib\x64;C:\Users\blabl\OneDrive\Рабочий стол\штуки\Uganafa\SDL2\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,6 +151,7 @@
     <ClInclude Include="ECS\Components.h" />
     <ClInclude Include="ECS\ECS.h" />
     <ClInclude Include="ECS\KeyboardController.h" />
+    <ClInclude Include="ECS\ProjectileComponent.h" />
     <ClInclude Include="ECS\TileComponent.h" />
     <ClInclude Include="ECS\TransformComponent.h" />
     <ClInclude Include="ECS\SpriteComponent.h" />

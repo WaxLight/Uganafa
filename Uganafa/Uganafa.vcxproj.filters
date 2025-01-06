@@ -92,6 +92,9 @@
     <ClInclude Include="AssetManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="ECS\ProjectileComponent.h">
+      <Filter>Исходные файлы\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Doock.png">

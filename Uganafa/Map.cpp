@@ -22,8 +22,7 @@ void Map::LoadMap( int sizeX, int sizeY)
 	for (int y = -sizeY; y < sizeY; y++) {
 		for (int x = -sizeX; x < sizeX; x++) {
 			int k = dist(rd);
-			int m = dist(rd) * tileSize;
-		AddTile(m, k * tileSize, x * scaledSize, y * scaledSize);
+		AddTile(dist(rd) * tileSize, k * tileSize, x * scaledSize, y * scaledSize);
 		if (k > 4 && x > 0 && y > 0) {
 			auto& tcol(manager.addEntity());
 			tcol.addComponent<ColliderComponent>("zemla", x * scaledSize, y * scaledSize,scaledSize);

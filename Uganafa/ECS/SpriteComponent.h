@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include <map>
 #include "../AssetManager.h"
+#include<string>
 
 class SpriteComponent: public Component {
 private:
@@ -23,8 +24,8 @@ public:
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
 	SpriteComponent() = default;
-	SpriteComponent(const char* path) {
-		setTex(path);
+	SpriteComponent(std::string id) {
+		setTex(id);
 	}
 	SpriteComponent(std::string id, bool isAnimated) {
 		animated = isAnimated;
