@@ -31,7 +31,7 @@ public:
 		animated = isAnimated;
 
 		Animation idle = Animation(0, 4, 100);
-		Animation walk = Animation(1, 8, 100);
+		Animation walk = Animation(1, 8, 150);
 
 		animations.emplace("Idle", idle);
 		animations.emplace("Walk", walk);
@@ -55,8 +55,8 @@ public:
 			srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
 		}
 		srcRect.y = animIndex * (transform->height + 1);
-		destRect.x = static_cast<int>(transform->position.x) - Game::camera.x;
-		destRect.y = static_cast<int>(transform->position.y)- Game::camera.y;
+		destRect.x = static_cast<int>(transform->position.x - Game::camera.x);
+		destRect.y = static_cast<int>(transform->position.y- Game::camera.y);
 		destRect.w = transform->width * transform->scale;
 		destRect.h = transform->height * transform->scale;
 	};

@@ -17,7 +17,7 @@ SDL_Event Game::event;
 
  bool Game::isRunning=false;
 
- SDL_Rect Game::camera = { 0,0,480*2,270*2 };
+ SDL_FRect Game::camera = { 0,0,480.f*2,270.f*2 };
 
 auto& player(manager.addEntity());
 auto& label(manager.addEntity());
@@ -58,7 +58,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	map->LoadMap(25, 20);
 	std::cout << "Map loaded\n";
 
-	player.addComponent<TransformComponent>(0,0,32,32,2);
+	player.addComponent<TransformComponent>(0,0,32,32,3);
 	player.addComponent<SpriteComponent>("player", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
@@ -72,7 +72,7 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	//assets->CreateObjects(Vector2D(0, 0), Vector2D(0, 1), 600, 1, "projectile");
 	//assets->CreateObjects(Vector2D(0, 0), Vector2D(1, 0), 600, 1, "projectile");
 	assets->CreateObjects(Vector2D(32.f, 0.f), Vector2D(0.f, -1.f), 600, 1, "projectile");
-	assets->CreateObjects(Vector2D(0.f, 0.f), Vector2D(0.f, 0.f), 6400, 0, "projectile");
+	//assets->CreateObjects(Vector2D(0.f, 0.f), Vector2D(0.f, 0.f), 6400, 0, "projectile");
 	std::cout << "ProjectileCreated\n";
 }
 auto& tiles(manager.getGroup(Game::groupMap));

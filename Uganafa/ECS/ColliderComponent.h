@@ -41,8 +41,8 @@ public:
 			collider.h = transform->height * transform->scale;
 		}
 
-		destR.x = collider.x - Game::camera.x;
-		destR.y = collider.y - Game::camera.y;
+		destR.x = collider.x - static_cast<int>(Game::camera.x);
+		destR.y = collider.y - static_cast<int>(Game::camera.y);
 	}
 	void draw() override {
 		TextureManager::Draw(tex, srcR, destR, SDL_FLIP_NONE);

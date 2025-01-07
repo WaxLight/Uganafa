@@ -17,7 +17,6 @@ Vector2D& Vector2D::Add(const Vector2D& vec)
 
 	return *this;
 }
-
 Vector2D& Vector2D::Vichest(const Vector2D& vec)
 {
 	this->x -= vec.x;
@@ -25,7 +24,6 @@ Vector2D& Vector2D::Vichest(const Vector2D& vec)
 
 	return *this;
 }
-
 Vector2D& Vector2D::Umnozhit(const Vector2D& vec)
 {
 	this->x *= vec.x;
@@ -33,7 +31,6 @@ Vector2D& Vector2D::Umnozhit(const Vector2D& vec)
 
 	return *this;
 }
-
 Vector2D& Vector2D::Podelit(const Vector2D& vec)
 {
 	this->x /= vec.x;
@@ -42,11 +39,11 @@ Vector2D& Vector2D::Podelit(const Vector2D& vec)
 	return *this;
 }
 
+
 Vector2D& operator+(Vector2D& v1, const Vector2D& v2)
 {
 	return v1.Add(v2);
 }
-
 Vector2D& operator-(Vector2D& v1, const Vector2D& v2)
 {
 	return v1.Vichest(v2);
