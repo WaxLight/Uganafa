@@ -6,6 +6,7 @@
 #include "Vector2D.h"
 #include "Collision.h"
 #include "AssetManager.h"
+#include <sstream>
 
 Map* map;
 Manager manager;
@@ -16,9 +17,10 @@ SDL_Event Game::event;
 
  bool Game::isRunning=false;
 
- SDL_Rect Game::camera = { 0,0,800,640 };
+ SDL_Rect Game::camera = { 0,0,480*2,270*2 };
 
 auto& player(manager.addEntity());
+auto& label(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
@@ -40,9 +42,14 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 		}
 		isRunning = true;
 	}
+	if (TTF_Init() == -1) {
+		std::cout<<"Error : SDL_TTF\n";
+	}
 	assets->AddTexture("map", "Assets/TXTilesetGrass.png");
 	assets->AddTexture("player", "Assets/Doock_anim.png");
 	assets->AddTexture("projectile", "Assets/proj.png");
+
+	assets->AddFont("rob","Assets/Roboto.ttf",16);
 
 	map = new Map("map", 2, 32);
 
@@ -57,6 +64,9 @@ void Game::init(const char* p_title, int xpos, int ypos,int width,int height, bo
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
 	std::cout << "PlayerCreated\n";
+
+	SDL_Color white = { 255,255,255,255 };
+	label.addComponent<UILabel>(400, 0, "", "rob", white);
 
 	assets->CreateObjects(Vector2D(32.f, 0.f), Vector2D(-1.f, 0.f), 600, 1, "projectile");
 	//assets->CreateObjects(Vector2D(0, 0), Vector2D(0, 1), 600, 1, "projectile");
@@ -85,6 +95,11 @@ void Game::update() {
 	SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
+	std::stringstream ss;
+	ss << "Player position " << playerPos;;
+
+	label.getComponent<UILabel>().SetLabelText(ss.str(), "rob");
+
 	manager.referesh();
 	manager.update();
 
@@ -100,8 +115,8 @@ void Game::update() {
 		}
 	}
 
-	camera.x = player.getComponent<TransformComponent>().position.x - 800.f / 2.f;
-	camera.y = player.getComponent<TransformComponent>().position.y - 640.f / 2.f;
+	camera.x = player.getComponent<TransformComponent>().position.x - 480.f ;
+	camera.y = player.getComponent<TransformComponent>().position.y - 270.f ;
 
 	
 }
@@ -122,6 +137,7 @@ void Game::render() {
 	for (auto& p : projectiles) {
 		p->draw();
 	}
+	label.draw();
 	SDL_RenderPresent(renderer);
 }
 //Очистка памяти

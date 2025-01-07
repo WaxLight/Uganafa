@@ -14,8 +14,6 @@ public:
 	}
 
 	void update() override {
-
-
 		if (Game::event.type == SDL_KEYDOWN) {
 			switch (Game::event.key.keysym.sym)
 			{

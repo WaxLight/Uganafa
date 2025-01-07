@@ -2,7 +2,6 @@
 //
 #include <iostream>
 #include <SDL.h>
-
 #include "Game.h"
 //позиция объеста В пространстве+
 struct Position {
@@ -108,7 +107,7 @@ int main(int argc, char* argv[]) {
     //создаём игру
     game = new Game();
     // создаём окно с игрой с назанием Uganafa в центре экрана размером 800х640р не на полный экран 
-    game->init("Uganafa", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+    game->init("Uganafa", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 480*2, 270*2,false);
     // Создаём цикл, который воспроизводит ивенты, обновляет и рендерит игру и задерживает фпс
     while (game->running()) { 
         frameStart = SDL_GetTicks();

@@ -32,7 +32,6 @@ public:
 		tex = TextureManager::LoadTexture("Assets/Col.png");
 		srcR = { 0,0,32,32 };
 		destR = { collider.x,collider.y,collider.w,collider.h };
-		//Game::colliders.push_back(this);
 	}
 	void update() override {
 		if (tag != "zemla") {

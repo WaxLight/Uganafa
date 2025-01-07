@@ -95,6 +95,9 @@
     <ClInclude Include="ECS\ProjectileComponent.h">
       <Filter>Исходные файлы\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="ECS\UILabel.h">
+      <Filter>Исходные файлы\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Doock.png">
@@ -124,5 +127,10 @@
     <Image Include="Assets\grass.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\Roboto.ttf">
+      <Filter>Файлы ресурсов</Filter>
+    </Font>
   </ItemGroup>
 </Project>
