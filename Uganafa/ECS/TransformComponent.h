@@ -33,6 +33,16 @@ public:
 		width = w;
 		scale = sc;
 	}
+	float TargetX() {
+		return position.x + velocity.x * speed;
+	}
+	float TargetY() {
+		return position.y + velocity.y * speed;
+	}
+	Vector2D Target() {
+		return { TargetX(),TargetY()};
+	}
+
 	void init() override {
 		velocity.Zero();
 	}

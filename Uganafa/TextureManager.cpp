@@ -1,5 +1,5 @@
 #include "TextureManager.h"
-
+#include <iostream>
 //Загрузка текстур
 SDL_Texture* TextureManager::LoadTexture(const char* texture) {
 	SDL_Surface* tmpSurface = IMG_Load(texture);
@@ -9,7 +9,11 @@ SDL_Texture* TextureManager::LoadTexture(const char* texture) {
 	return tex;
 }
 //Загрузка копии текстуры в опр месте в окне
+void TextureManager::Draw(SDL_Texture* tex, SDL_Rect src, SDL_FRect dest, SDL_RendererFlip flip)
+{
+	SDL_RenderCopyExF(Game::renderer, tex, &src, &dest,NULL,NULL,flip);
+}
 void TextureManager::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, SDL_RendererFlip flip)
 {
-	SDL_RenderCopyEx(Game::renderer, tex, &src, &dest,NULL,NULL,flip);
+	SDL_RenderCopyEx(Game::renderer, tex, &src, &dest, NULL, NULL, flip);
 }

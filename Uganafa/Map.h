@@ -5,11 +5,14 @@ public:
 	Map(std::string tID, int ms, int ts);
 	~Map();
 
-	void LoadMap( int sizeX,int sizeY);
+	void LoadMap();
 	void AddTile(int srcX, int srcY, int xpos, int ypos);
+	void AddWallColl(int x, int y, bool horiz);
+
 private:
 	std::string texID;
 	int mapScale;
 	int tileSize;
 	int scaledSize;
+
 };

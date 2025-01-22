@@ -18,12 +18,14 @@ public:
 	void clean();
 
 	bool running() { return isRunning; }
+	bool isPause() { return pause; }
 
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static bool isRunning;
 	static SDL_FRect camera;
 	static AssetManager* assets;
+	static bool pause;
 
 	enum groupLabels : std::size_t {
 		groupMap,
