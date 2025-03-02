@@ -43,6 +43,11 @@ public:
 			srcR = { 0,0,32,32 };
 			destR = { collider.x,collider.y,collider.w,collider.h };
 		}
+		if (tag == "win") {
+			tex = TextureManager::LoadTexture("Assets/proj.png");
+			srcR = { 0,0,32,32 };
+			destR = { collider.x,collider.y,collider.w,collider.h };
+		}
 	}
 	void update() override {
 		if (tag == "player") {

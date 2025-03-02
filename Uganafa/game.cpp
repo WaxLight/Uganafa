@@ -107,6 +107,7 @@ void Game::handleEvents() {
 void Game::update() {
 	SDL_FRect playerCol = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
+	Vector2D playerOldVel= player.getComponent<TransformComponent>().velocity*player.getComponent<TransformComponent>().speed;
 
 	std::stringstream ss;
 	std::stringstream ss1;
@@ -120,6 +121,7 @@ void Game::update() {
 	//}
 //		if (true) {}
 //	}
+	
 	manager.referesh();
 	manager.update();
 	ss << "Player position " << playerCol.x << " "<<playerCol.w << " " << playerCol.y << " "<<playerCol.h;
@@ -150,29 +152,17 @@ void Game::update() {
 			//<< gary.h << " h " << c->getComponent<ColliderComponent>().collider.h << " / ";
 
 		   //player.getComponent<TransformComponent>().position = playerPos;
-		   if (playerVel.x > 0)
-		   {
-			   player.getComponent<KeyboardController>().Stop(0, 0, 0, 1);
-			   player.getComponent<TransformComponent>().position.x =  c->getComponent<ColliderComponent>().collider.x -(player.getComponent<ColliderComponent>().collider.w)*  player.getComponent<TransformComponent>().scale;
-
+			auto tag = c->getComponent<ColliderComponent>().tag;
+			if (tag == "wall") {
+				player.getComponent<TransformComponent>().position = playerPos-playerOldVel;
+			}
+		   if (tag == "win") {
+			   for (auto& c : colliders)
+				   c->destroy();
+			   map->LoadMap();
+			   player.getComponent<TransformComponent>().position.Zero();
+			   break;
 		   }
-		   	if(playerVel.x<0)
-			{
-				player.getComponent<KeyboardController>().Stop(0, 1, 0, 0);
-				player.getComponent<TransformComponent>().position.x = c->getComponent<TransformComponent>().position.x+ player.getComponent<TransformComponent>().scale;
-
-			}
-			if (playerVel.y < 0)
-			{
-				player.getComponent<KeyboardController>().Stop(1, 0, 0, 0);
-				player.getComponent<TransformComponent>().position.y = c->getComponent<TransformComponent>().position.y ;
-
-			}
-			if(playerVel.y>0)
-			{
-				player.getComponent<KeyboardController>().Stop(0, 0, 1, 0);
-				player.getComponent<TransformComponent>().position.y = c->getComponent<ColliderComponent>().collider.y - player.getComponent<ColliderComponent>().collider.y;
-			}
 		//}
 		//else ss1 << "hmm";// player.getComponent<KeyboardController>().Stop(0, 0, 0, 0);
 
@@ -201,6 +191,7 @@ void Game::render() {
 	}
 	for (auto& c : colliders) {
 		if(c->getComponent<ColliderComponent>().tag=="wall")c->draw();
+		if (c->getComponent<ColliderComponent>().tag == "win")c->draw();
 	}
 	for (auto& p : players) {
 		p->draw();

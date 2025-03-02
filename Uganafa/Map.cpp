@@ -29,7 +29,7 @@ Map::~Map() {
 }
 void Map::LoadMap()
 {
-    auto& tcol(manager.addEntity());
+    
     createMazeDFS();
     std::random_device rd;
     std::uniform_int_distribution<int> distG(0, 3);
@@ -45,6 +45,9 @@ void Map::LoadMap()
     mapScale *= 2;
    /* tcol.addComponent<ColliderComponent>("zemla", 0, 0, scaledSize , scaledSize);
     tcol.addGroup(Game::groupColliders);*/
+    auto& ecol(manager.addEntity());
+    ecol.addComponent<ColliderComponent>("win", (size - 1) * scaledSize + scaledSize / 4, (size - 1) * scaledSize + scaledSize / 4, scaledSize/2);
+    ecol.addGroup(Game::groupColliders);
     for (int j = 0, y=size-1; j < size; j++,y--) {
         for (int i = 0,x=size-1; i < size; i++,x--) {
             
@@ -53,7 +56,7 @@ void Map::LoadMap()
             
 
             //vertical walls
-            if ( i==size-1&& j!=size-1) {
+            if ( i==size-1) {
                 AddWallColl(x, y, false);
             }
             if (walls[i + j * size][0] == 0) {
@@ -61,7 +64,7 @@ void Map::LoadMap()
             }
 
             //horizontal walls
-            if (j==size-1 && i!=size-1) {
+            if (j==size-1) {
                 AddWallColl(x , y, true);
             }
             if (walls[i + j * size][1] == 0 /*|| j == 0 && i != 0*/) {
@@ -139,6 +142,7 @@ void randomdfs(int pos, int size) {
 }
 
 void createMazeDFS() {
+    visited.clear();
     int pos = 0;
     for (int i = 0; i < size * size; i++) {
         visited.emplace_back(0);
